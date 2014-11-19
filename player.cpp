@@ -2,14 +2,14 @@
 
 Player::Player(int _x, int _y, int _dir)
 {
-    x = _x;
-    tx = _x;
-    y = _y;
-    ty = _y;
-    dir = _dir;
-    mlcounter = 0;
-    mrcounter = 0;
-    moving = 0;
+  x = _x;
+  tx = _x;
+  y = _y;
+  ty = _y;
+  dir = _dir;
+  mlcounter = 0;
+  mrcounter = 0;
+  moving = 0;
 }
 
 int Player::getY(){return y;}

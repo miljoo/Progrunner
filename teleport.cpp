@@ -1,6 +1,5 @@
 #include "teleport.h"
 
-
   Teleport::Teleport(int _x, int _y){
     x = _x;
     y = _y;
@@ -9,10 +8,11 @@
 	int Teleport::playerOnTP(Player &player){
 		if(player.getX() == x && player.getY() == y){
       return 1;
-			//player.setX(tx);
-			//player.setY(ty);
-		}
+    }else{
+      return 0;
+    }
 	}
+
 	void Teleport::setTPLink(Teleport &tp){
 		tx = tp.getX();
 		ty = tp.getY();

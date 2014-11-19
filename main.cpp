@@ -48,38 +48,37 @@ int main(){
 
 
   //loop stuff
-   while(window.isOpen()){
-        sf::Event event;
+  while(window.isOpen()){
+    sf::Event event;
 
 
-while(gameloop){
-  sf::sleep(sf::Time(sf::seconds(0.1f)));
-			while(window.pollEvent(event)){
-				if(event.type == sf::Event::Closed){
-					window.close();
-				}
-				window.clear();
-				if(event.type == sf::Event::KeyPressed){
-					if(event.key.code == sf::Keyboard::Up){
-						 p.setDir(2);
-						 p.setMoving(1);
-					}
-					if(event.key.code == sf::Keyboard::Down){
-						 p.setDir(8);
-						 p.setMoving(1);
-					}
-					if(event.key.code == sf::Keyboard::Left){
-						 p.setDir(4);
-						 p.setMoving(1);
-					}
-					if(event.key.code == sf::Keyboard::Right){
-						 p.setDir(6);
-						 p.setMoving(1);
-					}
-				}
+  while(gameloop){
+    sf::sleep(sf::Time(sf::seconds(0.1f)));
+      while(window.pollEvent(event)){
+        if(event.type == sf::Event::Closed){
+          window.close();
+        }
+        window.clear();
+        if(event.type == sf::Event::KeyPressed){
+          if(event.key.code == sf::Keyboard::Up){
+            p.setDir(2);
+            p.setMoving(1);
+          }
+          if(event.key.code == sf::Keyboard::Down){
+            p.setDir(8);
+            p.setMoving(1);
+          }
+          if(event.key.code == sf::Keyboard::Left){
+            p.setDir(4);
+            p.setMoving(1);
+          }
+          if(event.key.code == sf::Keyboard::Right){
+            p.setDir(6);
+            p.setMoving(1);
+          }
+        }
 
-
-       while(p.getMoving()){
+        while(p.getMoving()){
           updateMcounters(p);
           if(p.getMLcounter() == 2){
             turnPlayer(p,LEFT);
@@ -88,13 +87,14 @@ while(gameloop){
           }
           checkMagnet(p,l);
 
-           if(t1.playerOnTP(p)){
-            p.setX(t1.getTx());
-            p.setY(t1.getTy());
-          }
-          if(t2.playerOnTP(p)){
-            p.setX(t2.getTx());
-            p.setY(t2.getTy());
+          if(t1.playerOnTP(p) || t2.playerOnTP(p)){
+            if(t1.playerOnTP(p)){
+              p.setX(t1.getTx());
+              p.setY(t1.getTy());}
+            else{
+              p.setX(t2.getTx());
+              p.setY(t2.getTy());
+            }
           }
 
           if(!checkPlayerFront(p,l)){
@@ -103,19 +103,17 @@ while(gameloop){
           else{
             p.setMoving(0);
           }
-          //draw map
-            drawMap(tilemap, tiles, window ,l);
-            //draw exit
-            //drawExit(tilemap, tiles, window, exit);
-            drawTP(tilemap, tiles, window, t1);
-            drawTP(tilemap, tiles, window, t2);
-            //draw player
-            drawPlayer(tilemap, tiles, window, p);
-            window.display();
+
+          drawMap(tilemap, tiles, window ,l);
+          //drawExit(tilemap, tiles, window, exit);
+          drawTP(tilemap, tiles, window, t1);
+          drawTP(tilemap, tiles, window, t2);
+          drawPlayer(tilemap, tiles, window, p);
+          window.display();
+          }
         }
       }
     }
-   }
   return 0;
 }
 

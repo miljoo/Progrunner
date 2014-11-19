@@ -12,7 +12,7 @@ Level::Level(){
 }
 
 void Level::makeWalls(){
-   //make walls for level
+   //make walls for level along the edges
   for(int j = 0; j < 10 ; j++){
     for (int i = 0 ; i < 10 ; i++){
       if(j == 0 || j == 9){
