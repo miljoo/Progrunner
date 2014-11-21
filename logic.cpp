@@ -75,6 +75,7 @@ int checkPlayerFront(Player player, Level level){
       }
     break;
   }
+  return 0;
 }
 
 
@@ -169,5 +170,36 @@ void drawTP(sf::Texture& tilemap, sf::Sprite& tiles, sf::RenderWindow& window, T
   tiles.setTextureRect(sf::IntRect(3* TILESIZE, 0, TILESIZE, TILESIZE));
   tiles.setTexture(tilemap);
   tiles.setPosition(teleport.getX()*TILESIZE, teleport.getY()*TILESIZE);
+  window.draw(tiles);
+}
+
+void drawButton(sf::Texture& tilemap, sf::Sprite& tiles, sf::RenderWindow& window, Button button){
+  list<pair< int, int> > gates = button.getList();
+  int colorAdj;
+  if(button.getColor() == 'G'){
+    colorAdj = 0;
+  }else if (button.getColor() == 'R'){
+    colorAdj = 2;
+  }
+  tiles.setTextureRect(sf::IntRect(2* TILESIZE, colorAdj* TILESIZE , TILESIZE, TILESIZE));
+  tiles.setTexture(tilemap);
+  tiles.setPosition(button.getX()*TILESIZE, button.getY()*TILESIZE);
+  window.draw(tiles);
+
+  for(list<pair<int, int > >::iterator lit = gates.begin(); lit != gates.end(); lit++){
+    int x = (*lit).first;
+    int y = (*lit).second;
+
+    tiles.setTextureRect(sf::IntRect(2 * TILESIZE, (colorAdj * TILESIZE + TILESIZE ), TILESIZE, TILESIZE));
+    tiles.setTexture(tilemap);
+    tiles.setPosition(x*TILESIZE, y*TILESIZE);
+    window.draw(tiles);
+  }
+}
+
+void drawExit(sf::Texture& tilemap, sf::Sprite& tiles, sf::RenderWindow& window, Exit exit){
+  tiles.setTextureRect(sf::IntRect(0, 4 * TILESIZE, TILESIZE, TILESIZE));
+  tiles.setTexture(tilemap);
+  tiles.setPosition(exit.getX()*TILESIZE, exit.getY()*TILESIZE);
   window.draw(tiles);
 }
